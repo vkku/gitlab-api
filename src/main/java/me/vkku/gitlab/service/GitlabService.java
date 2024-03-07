@@ -6,16 +6,18 @@ import me.vkku.gitlab.domain.BlameResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GitlabService {
 
     @Value("${gitlab.apikey}")
-    String apikey;
+    private String apikey;
 
-    GitlabClient gitlabClient;
+    private final GitlabClient gitlabClient;
 
-    public BlameResponse getBlame(String projectId, String urlEncodedFilePath, String branch) {
-        return gitlabClient.getBlame(apikey, projectId, urlEncodedFilePath, branch);
+    public List<BlameResponse> getBlame(String projectId, String urlEncodedFilePath, String branch) {
+        return gitlabClient.getBlame(projectId, urlEncodedFilePath, branch, apikey);
     }
 }

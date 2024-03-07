@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/git")
 @RequiredArgsConstructor
 public class GitlabController {
 
-    GitlabService gitlabService;
+    private final GitlabService gitlabService;
 
-    @GetMapping("/blame")
-    public BlameResponse getBlame(@PathVariable String projectId, @PathVariable String urlEncodedFilePath, @PathVariable String branch){
+    @GetMapping("/blame/{projectId}/{urlEncodedFilePath}/{branch}")
+    public List<BlameResponse> getBlame(@PathVariable String projectId, @PathVariable String urlEncodedFilePath, @PathVariable String branch){
         return gitlabService.getBlame(projectId, urlEncodedFilePath, branch);
     }
 }
