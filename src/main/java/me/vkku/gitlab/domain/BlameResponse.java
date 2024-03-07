@@ -1,5 +1,7 @@
 package me.vkku.gitlab.domain;
 
+import java.util.List;
+
 public class BlameResponse {
     private Commit commit;
     private List<String> lines;
@@ -8,7 +10,7 @@ public class BlameResponse {
 }
 
 
-public class Commit {
+class Commit {
     private String id;
     private String message;
     private List<String> parentIds;
